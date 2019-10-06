@@ -7,7 +7,6 @@ package com.github.arolfes.codewars;
 public class RemoveStringSpaces {
 
   static String noSpace(final String x) {
-    return x.chars().mapToObj(i -> (char) i).filter(i -> !i.equals(' '))
-        .collect(StringBuilder::new, StringBuilder::append, StringBuilder::append).toString();
+    return x.replace(" ", "");
   }
 }
