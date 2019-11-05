@@ -1,39 +1,25 @@
 package com.github.arolfes.codewars;
 
-import java.util.AbstractMap.SimpleEntry;
-import java.util.Map;
-import java.util.TreeMap;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
 /**
  * https://www.codewars.com/kata/roman-numerals-encoder/train/java
  */
 public class RomanNumeralsEncoder {
 
-    private static final TreeMap<Integer, String> romans = Stream.of(
-            new SimpleEntry<>(1000, "M"), 
-            new SimpleEntry<>(900, "CM"), 
-            new SimpleEntry<>(500, "D"), 
-            new SimpleEntry<>(400, "CD"),
-            new SimpleEntry<>(100, "C"), 
-            new SimpleEntry<>(90, "XC"), 
-            new SimpleEntry<>(50, "L"),
-            new SimpleEntry<>(40, "XL"),
-            new SimpleEntry<>(10, "X"), 
-            new SimpleEntry<>(9, "IX"), 
-            new SimpleEntry<>(5, "V"), 
-            new SimpleEntry<>(4, "IV"),
-            new SimpleEntry<>(1, "I"))
-            .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (oldValue, newValue) -> oldValue, TreeMap::new));
 
-    public static String encodeNumberToRomanNumber(int i) {
+    public static String encodeNumberToRomanNumber(int number) {
 
-        int l = romans.floorKey(i);
-        if (i == l) {
-            return romans.get(i);
+        String romanNumbers[] = {"M", "CMXC", "CM", "D", "CDXC", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
+        int arab[] = {1000, 990, 900, 500, 490, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
+        StringBuilder result = new StringBuilder();
+        int i = 0;
+        while (number > 0 || arab.length == (i - 1)) {
+            while ((number - arab[i]) >= 0) {
+                number -= arab[i];
+                result.append(romanNumbers[i]);
+            }
+            i++;
         }
-        return romans.get(l) + encodeNumberToRomanNumber(i - l);
+        return result.toString();
     }
-    
+
 }
