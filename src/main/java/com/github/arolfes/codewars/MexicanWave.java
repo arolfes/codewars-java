@@ -10,24 +10,15 @@ import java.util.List;
 public class MexicanWave {
 
     public static String[] wave(String str) {
-        if (str == null || "".equals(str)) {
-            return new String[0];
-        }
-        List<String> result = new ArrayList<>();
+        List<String> list = new ArrayList<>();
         for (int i = 0; i < str.length(); i++) {
-            if (str.charAt(i) == ' ') {
+            char ch = str.charAt(i);
+            if (ch == ' ') {
                 continue;
             }
-            result.add(upperCaseCharAndConvertToString(i, str));
+            list.add(str.substring(0, i) + Character.toUpperCase(ch) + str.substring(i + 1));
         }
-        return result.stream().toArray(String[]::new);
+        return list.toArray(new String[0]);
     }
 
-
-    private static String upperCaseCharAndConvertToString(int charPosForUppercase, String str) {
-        StringBuilder bu = new StringBuilder(str);
-        bu.replace(charPosForUppercase, charPosForUppercase + 1,
-                Character.toString(Character.toUpperCase(str.charAt(charPosForUppercase))));
-        return bu.toString();
-    }
 }
