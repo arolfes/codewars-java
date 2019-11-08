@@ -8,14 +8,13 @@ import java.util.Map;
  */
 public class NumericalsOfString {
 
-    public static String numericals(String input) {
+    public static String numericals(String s) {
         final StringBuilder result = new StringBuilder();
-        final Map<Integer, Integer> counts = new HashMap<>();
-        input.codePoints().boxed().forEach(i -> {
-            Integer sum = counts.getOrDefault(i, 1);
-            result.append(sum);
-            counts.put(i, sum + 1);
-        });
+        final Map<String, Integer> counts = new HashMap<>();
+        for (String c : s.split("")) {
+            counts.put(c, 1 + counts.getOrDefault(c, 0));
+            result.append(counts.get(c));
+        }
         return result.toString();
     }
 
